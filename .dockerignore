@@ -1,0 +1,17 @@
+.git
+.agents
+.codex
+.env
+.env.*
+*.env
+*.json
+*.pem
+*.key
+credentials/
+secrets/
+bin/
+dist/
+coverage*
+*.exe
+*.test
+*.out
