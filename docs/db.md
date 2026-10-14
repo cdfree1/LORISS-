@@ -9,6 +9,7 @@ cmd/server/                  configuration, pool creation, dependency injection
 cmd/migrate/                 explicit migration command
 internal/store/              provider-neutral types and repository interfaces
 internal/postgres/           PostgreSQL implementation of internal/store
+internal/syncstate/          caller-facing transactional facade over internal/store
 internal/postgres/migrations/ SQL migrations
 internal/sync/               depends on internal/store only
 internal/calendar/, live25/  translate provider payloads outside the database layer
@@ -19,6 +20,13 @@ Use `pgx/v5` and `pgxpool`. The PostgreSQL implementation receives a configured 
 ## Store contract
 
 `internal/store` defines plain Go types and interfaces. It must not import the sync engine, provider adapters, or provider SDKs.
+
+Provider adapters, webhook handlers, and workers access those repositories
+through `internal/syncstate`, which validates caller inputs, assigns
+LORISS-owned IDs, and owns transactional state transitions. `store.Store`
+remains the narrow dependency injected into that facade; callers do not issue
+SQL or depend on the concrete PostgreSQL implementation. See
+[`syncstate.md`](syncstate.md) for its public methods and usage rules.
 
 ```go
 type Source string // google | live25
