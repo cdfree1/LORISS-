@@ -1,0 +1,36 @@
+name: loriss
+
+services:
+  db:
+    image: postgres:17-bookworm
+    environment:
+      POSTGRES_DB: loriss
+      POSTGRES_USER: loriss
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -h 127.0.0.1 -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 3s
+      retries: 12
+      start_period: 10s
+    restart: unless-stopped
+    stop_grace_period: 30s
+
+  app:
+    image: loriss:local
+    build: .
+    environment:
+      PORT: "8080"
+      DATABASE_URL: postgres://loriss:${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}@db:5432/loriss?sslmode=disable&pool_max_conns=5
+    ports:
+      - "127.0.0.1:8080:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+    stop_grace_period: 15s
+
+volumes:
+  postgres_data:
