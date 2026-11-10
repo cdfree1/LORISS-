@@ -1,2 +1,9 @@
 *.env
 *.json
+extension/node_modules/
+extension/dist/
+extension/*.zip
+!extension/manifest.json
+!extension/package-lock.json
+!extension/package.json
+!extension/tsconfig.json

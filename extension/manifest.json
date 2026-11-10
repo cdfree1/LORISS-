@@ -1,0 +1,11 @@
+{
+  "manifest_version": 3,
+  "name": "LORISS 25Live Access",
+  "version": "0.1.0",
+  "description": "Tests read-only 25Live access through the active browser session without storing credentials or results.",
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "LORISS Access MVP"
+  },
+  "host_permissions": ["https://25live.collegenet.com/*"]
+}

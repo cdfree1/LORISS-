@@ -1,0 +1,60 @@
+:root {
+  color: #17212b;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+body {
+  width: 320px;
+  margin: 0;
+  background: #f8fafc;
+}
+
+main {
+  padding: 16px;
+}
+
+h1 {
+  margin: 0;
+}
+
+h1 {
+  font-size: 18px;
+}
+
+.intro, .status {
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.intro {
+  color: #415466;
+  margin: 8px 0 16px;
+}
+
+button {
+  background: #155eef;
+  border: 0;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  font: inherit;
+  margin: 0 6px 8px 0;
+  padding: 8px 10px;
+}
+
+button:disabled {
+  cursor: wait;
+  opacity: .65;
+}
+
+.status {
+  background: #edf2f7;
+  border-radius: 5px;
+  margin: 2px 0 0;
+  min-height: 19px;
+  padding: 8px;
+}
+
+.status.success { background: #dcfae6; color: #085d2a; }
+.status.error { background: #fee4e2; color: #8d1c13; }
+.status.pending { background: #e0eaff; color: #1849a9; }
